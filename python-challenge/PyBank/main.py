@@ -1,4 +1,4 @@
-# Import libraries
+# Import modules
 
 import os
 import csv
@@ -13,6 +13,7 @@ total = 0
 count = 0
 total_change = 0
 initial_profit = 0
+
 # Path to collect data from the Resources folder
 budget_csv = os.path.join("..","Resources","budget_data.csv")
 
@@ -23,8 +24,10 @@ with open(budget_csv, 'r') as csvfile:
     # Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
     header= next(csvreader)
+
     # Run through each row in the file
     for row in csvreader:
+
         # Calculate the total months
         count = count +1
         #Add each date row to date list
@@ -34,25 +37,29 @@ with open(budget_csv, 'r') as csvfile:
         #Calculate the total profit
         total = total + int(row[1])
 
-        #def average(monthly_changes):
-            #return sum(monthly_changes)/ len(monthly_changes)
         #Calculate what the monthly changes in profit will be and store the value in the monthly_changes list
         last_profit = int(row[1])
         monthly_profit_change = last_profit- initial_profit
         monthly_changes.append(monthly_profit_change)
+
         total_change = total_change + monthly_profit_change
         initial_profit = last_profit
 
-        #avg = average(monthly_changes)
-        #Calculate the average change in profit
+        
+        
         
 
         #Calculate the greatest increase and decreae in profit and the corresponding date
         greatest_increase_profits = max(monthly_changes)
         greatest_decrease_profits = min(monthly_changes)
+
+        
         date_increase = date[monthly_changes.index(greatest_increase_profits)]
         date_decrease = date[monthly_changes.index(greatest_decrease_profits)]
+    
+    #Calculate the average change in profit
     monthly_changes.pop(0)
+
 
     avg= sum(monthly_changes)/ len(monthly_changes)
     
