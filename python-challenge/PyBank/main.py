@@ -17,7 +17,6 @@ initial_profit = 0
 # Path to collect data from the Resources folder
 budget_csv = os.path.join("..","Resources","budget_data.csv")
 
-
 # Read in the csv file
 with open(budget_csv, 'r') as csvfile:
 
@@ -45,28 +44,24 @@ with open(budget_csv, 'r') as csvfile:
         total_change = total_change + monthly_profit_change
         initial_profit = last_profit
 
-        
-        
-        
-
         #Calculate the greatest increase and decreae in profit and the corresponding date
         greatest_increase_profits = max(monthly_changes)
         greatest_decrease_profits = min(monthly_changes)
 
-        
         date_increase = date[monthly_changes.index(greatest_increase_profits)]
         date_decrease = date[monthly_changes.index(greatest_decrease_profits)]
     
     #Calculate the average change in profit
     monthly_changes.pop(0)
 
-
     avg= sum(monthly_changes)/ len(monthly_changes)
     
 
 #Print out the results
 print("Fiancial Analysis")
+
 print("-------------------------------------------------------")
+
 print (f"Total Months: {count}")
 
 print(f"Total Profit: ${total}")
@@ -76,5 +71,28 @@ print(f"Average Change: ${round(avg,2)}")
 print(f"Greatest Increase in Profit:  {date_increase} (${greatest_increase_profits})")
 
 print(f"Greatest Decrease in Profit:  {date_decrease} (${greatest_decrease_profits})")
+
+print("-------------------------------------------------------")
+
+
+#  Write output to the text file
+
+with open("financial_analysis.txt", "w") as text:
+
+    text.write("Fiancial Analysis" + "\n")
+
+    text.write("-------------------------------------------------------\n")
+
+    text.write(f"Total Months: {count}" +"\n")
+
+    text.write(f"Total Profit: ${total}"+"\n")
+
+    text.write(f"Average Change: ${round(avg,2)}"+"\n")
+
+    text.write(f"Greatest Increase in Profit:  {date_increase} (${greatest_increase_profits})"+"\n")
+
+    text.write(f"Greatest Decrease in Profit:  {date_decrease} (${greatest_decrease_profits})"+"\n")
+
+    text.write("-------------------------------------------------------\n")
 
 
